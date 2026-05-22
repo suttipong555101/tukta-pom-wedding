@@ -1445,15 +1445,23 @@ body {
     .heart-inner { padding: 7rem 3.5rem 7.5rem; }
     .parents-row { flex-direction: column; gap: 0.5rem; }
 
-    .tl-row { grid-template-columns: 0 40px 1fr; margin-bottom: 2.5rem; }
-    .tl-left .tl-card { display: none; }
-    .tl-right .tl-card { display: block; }
-    /* แถวซ้ายบนมือถือ — ย้ายไปฝั่งขวา */
-    .tl-row:nth-child(odd) { grid-template-columns: 0 40px 1fr; }
-    .tl-row:nth-child(odd) .tl-left { display: none; }
-    .tl-row:nth-child(odd) .tl-right { display: block; }
-    .tl-row:nth-child(odd) .tl-right .tl-card,
-    .tl-row:nth-child(even) .tl-right .tl-card { display: block; }
+    /* Timeline mobile — แสดงทุก card ชิดซ้าย */
+    .tl-row {
+        grid-template-columns: 40px 1fr;
+        grid-template-rows: auto;
+        margin-bottom: 2.5rem;
+        align-items: start;
+    }
+    .tl-mid  { grid-column: 1; grid-row: 1; }
+    .tl-left { grid-column: 2; grid-row: 1; }
+    .tl-right{ grid-column: 2; grid-row: 1; }
+
+    /* แสดง card ทั้งฝั่งซ้ายและขวา (มีแค่ 1 ต่อ row อยู่แล้ว) */
+    .tl-left .tl-card  { display: block; opacity: 0; transform: translateX(40px); }
+    .tl-right .tl-card { display: block; opacity: 0; transform: translateX(40px); }
+    .tl-left .tl-card.tl-visible,
+    .tl-right .tl-card.tl-visible { opacity: 1; transform: translateX(0); }
+
     .tl-track { left: 20px; transform: none; }
     .tl-time { font-size: 2.2rem; }
 
