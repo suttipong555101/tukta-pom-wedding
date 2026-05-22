@@ -34,6 +34,7 @@
 const WEDDING_DATE = new Date('2026-06-27T08:09:00');
 const ADMIN_PASSWORD = 'tukta-pom2026';
 const STORAGE_KEY = 'wedding_guests_tukta_pom';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz3HbI3WTmoB_lxj7b9KDa1Z2YUwUIrYHRhH-qQ7NHybwjwDuXUIY5GGT38ELJqNRld/exec';
 
 function updateCountdown() {
     const now = new Date();
@@ -162,8 +163,7 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
     if (!attend)   { alert('กรุณาเลือกการเข้าร่วม'); return; }
     if (attend === 'yes' && !count) { alert('กรุณาเลือกจำนวนผู้เข้าร่วม'); return; }
 
-    const guests = getGuests();
-    guests.push({
+    const guestData = {
         id: Date.now(),
         nickname,
         team,
@@ -172,9 +172,21 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
         date: new Date().toLocaleDateString('th-TH', {
             day: '2-digit', month: '2-digit', year: 'numeric'
         })
-    });
+    };
+
+    // บันทึก localStorage (backup)
+    const guests = getGuests();
+    guests.push(guestData);
     saveGuests(guests);
     renderScoreboard();
+
+    // ส่งไป Google Sheets
+    fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(guestData)
+    }).catch(() => {});
 
     document.getElementById('successMsg').textContent =
         attend === 'yes' ? 'เราตั้งตารอต้อนรับท่านในวันงาน 🎉' : 'ขอบคุณที่ส่งใจมาด้วยนะ 💌';
