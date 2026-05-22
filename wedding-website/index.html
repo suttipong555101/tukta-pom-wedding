@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tukta & Pom Wedding — 27.06.2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">Tukta <span>&</span> Pom</div>
+        <ul class="nav-links">
+            <li><a href="#invitation">คำเชิญ</a></li>
+            <li><a href="#schedule">กำหนดการ</a></li>
+            <li><a href="#venue">สถานที่</a></li>
+            <li><a href="#gallery">แกลเลอรี่</a></li>
+            <li><a href="#activities">กิจกรรม</a></li>
+            <li><a href="#rsvp" class="nav-rsvp">ตอบรับ</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger">☰</button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden" id="mobileMenu">
+        <a href="#invitation" onclick="closeMobile()">คำเชิญ</a>
+        <a href="#schedule" onclick="closeMobile()">กำหนดการ</a>
+        <a href="#venue" onclick="closeMobile()">สถานที่</a>
+        <a href="#gallery" onclick="closeMobile()">แกลเลอรี่</a>
+        <a href="#activities" onclick="closeMobile()">กิจกรรม</a>
+        <a href="#rsvp" onclick="closeMobile()">ตอบรับ</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_4.jpg" alt="Tukta & Pom" class="hero-bg">
+        <div class="hero-content">
+            <img src="../การ์ดงานแต่ง/ตุ๊กตา-ป้อม Logo.png" alt="Tukta Pom" class="hero-logo">
+            <p class="hero-sub">เรามีความยินดีขอเรียนเชิญท่านร่วมงานมงคลสมรส</p>
+            <h2 class="hero-names">ตุ๊กตา <span class="hero-infinity">∞</span> ป้อม</h2>
+            <p class="hero-date">วันเสาร์ที่ ๒๗ มิถุนายน พ.ศ. ๒๕๖๙</p>
+
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span>
+                    <label>วัน</label>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    <label>ชั่วโมง</label>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    <label>นาที</label>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <label>วินาที</label>
+                </div>
+            </div>
+
+            <a href="#rsvp" class="btn-hero">ตอบรับการเชิญ</a>
+        </div>
+        <div class="hero-scroll">
+            <span>เลื่อนลง</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- Invitation -->
+    <section class="invitation" id="invitation">
+        <div class="container">
+            <h2 class="section-title">คำเชิญ</h2>
+
+            <div class="invite-stage">
+            <!-- ซองจดหมาย -->
+            <div class="envelope-scene" id="envelopeScene">
+                <div class="envelope" id="envelope" onclick="openEnvelope()">
+                    <div class="env-back"></div>
+                    <div class="env-card-inside" id="envCardInside">
+                        <img src="../การ์ดงานแต่ง/ตุ๊กตา-ป้อม หน้า.jpg" alt="การ์ดเชิญ">
+                    </div>
+                    <div class="env-front-bottom"></div>
+                    <div class="env-flap-wrap" id="envFlapWrap">
+                        <div class="env-flap-face"></div>
+                    </div>
+                    <div class="env-seal" id="envSeal">💌</div>
+                </div>
+                <p class="envelope-hint" id="envelopeHint">✨ แตะเพื่อเปิดซอง ✨</p>
+            </div>
+
+            <!-- การ์ดทั้งสองด้าน (แสดงหลังเปิดซอง) -->
+            <div class="card-display-row" id="envelopeCards">
+                <div class="card-display">
+                    <img src="../การ์ดงานแต่ง/ตุ๊กตา-ป้อม หน้า.jpg" alt="การ์ดเชิญ หน้า">
+                    <p class="card-label">หน้า</p>
+                </div>
+                <div class="card-display">
+                    <img src="../การ์ดงานแต่ง/ตุ๊กตา-ป้อม หลัง.jpg" alt="การ์ดเชิญ หลัง">
+                    <p class="card-label">หลัง</p>
+                </div>
+            </div>
+            </div><!-- /invite-stage -->
+        </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="schedule" id="schedule">
+        <div class="sched-bg-word" aria-hidden="true">WEDDING DAY</div>
+        <div class="container">
+            <h2 class="section-title">กำหนดการ</h2>
+            <div class="tl-wrap" id="tlWrap">
+                <div class="tl-track"><div class="tl-progress" id="tlProgress"></div></div>
+
+                <!-- Event 1 -->
+                <div class="tl-row">
+                    <div class="tl-side tl-left">
+                        <div class="tl-card">
+                            <div class="tl-time">08<span class="tl-colon">:</span>09<em>น.</em></div>
+                            <div class="tl-icon">
+                                <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" width="56" height="56">
+                                    <rect x="24" y="44" width="12" height="6" rx="2" fill="#E8C97A"/>
+                                    <ellipse cx="30" cy="50" rx="10" ry="3" fill="#C4973B"/>
+                                    <ellipse cx="30" cy="40" rx="18" ry="5" fill="#C4973B"/>
+                                    <ellipse cx="30" cy="38" rx="18" ry="5" fill="#E8C97A"/>
+                                    <ellipse cx="30" cy="37" rx="16" ry="4" fill="#C4973B"/>
+                                    <circle cx="22" cy="30" r="5" fill="#E8C97A" stroke="#C4973B" stroke-width="1"/>
+                                    <circle cx="30" cy="26" r="6" fill="#C4973B" stroke="#9B7A2E" stroke-width="1"/>
+                                    <circle cx="38" cy="30" r="5" fill="#E8C97A" stroke="#C4973B" stroke-width="1"/>
+                                    <circle cx="30" cy="19" r="4" fill="#FFF5DC"/>
+                                    <circle cx="26" cy="22" r="3" fill="#FFF5DC"/>
+                                    <circle cx="34" cy="22" r="3" fill="#FFF5DC"/>
+                                    <circle cx="30" cy="19" r="2" fill="#E8C97A"/>
+                                    <polygon points="30,8 33,18 27,18" fill="#E8C97A"/>
+                                    <circle cx="30" cy="8" r="3" fill="#FFF5DC"/>
+                                </svg>
+                            </div>
+                            <h3 class="tl-name">พิธีแห่ขันหมาก</h3>
+                            <p class="tl-desc">ขบวนแห่อันเป็นมงคลจากฝ่ายชาย</p>
+                        </div>
+                    </div>
+                    <div class="tl-mid">
+                        <div class="tl-dot"><span class="tl-ring"></span><span class="tl-ring tl-ring2"></span></div>
+                    </div>
+                    <div class="tl-side tl-right"></div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="tl-row">
+                    <div class="tl-side tl-left"></div>
+                    <div class="tl-mid">
+                        <div class="tl-dot"><span class="tl-ring"></span><span class="tl-ring tl-ring2"></span></div>
+                    </div>
+                    <div class="tl-side tl-right">
+                        <div class="tl-card">
+                            <div class="tl-time">09<span class="tl-colon">:</span>09<em>น.</em></div>
+                            <div class="tl-icon">
+                                <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" width="56" height="56">
+                                    <ellipse cx="30" cy="52" rx="14" ry="4" fill="#C4973B" opacity="0.5"/>
+                                    <rect x="22" y="48" width="16" height="5" rx="2" fill="#E8C97A"/>
+                                    <polygon points="30,38 44,50 16,50" fill="#2E7D32"/>
+                                    <polygon points="30,38 43,49 17,49" fill="#43A047"/>
+                                    <polygon points="30,26 41,40 19,40" fill="#388E3C"/>
+                                    <polygon points="30,26 40,39 20,39" fill="#4CAF50"/>
+                                    <polygon points="30,16 38,28 22,28" fill="#43A047"/>
+                                    <polygon points="30,16 37,27 23,27" fill="#66BB6A"/>
+                                    <circle cx="18" cy="48" r="3.5" fill="#F48FB1"/>
+                                    <circle cx="42" cy="48" r="3.5" fill="#F48FB1"/>
+                                    <circle cx="21" cy="38" r="3" fill="#FFF5DC"/>
+                                    <circle cx="39" cy="38" r="3" fill="#FFF5DC"/>
+                                    <circle cx="24" cy="27" r="2.5" fill="#F48FB1"/>
+                                    <circle cx="36" cy="27" r="2.5" fill="#F48FB1"/>
+                                    <circle cx="30" cy="12" r="5" fill="#E8C97A" stroke="#C4973B" stroke-width="1.5"/>
+                                    <circle cx="30" cy="12" r="2.5" fill="#C4973B"/>
+                                </svg>
+                            </div>
+                            <h3 class="tl-name">พิธีบายศรีสู่ขวัญ</h3>
+                            <p class="tl-desc">พิธีมงคลตามประเพณีไทย</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="tl-row">
+                    <div class="tl-side tl-left">
+                        <div class="tl-card">
+                            <div class="tl-icon" style="font-size:3rem;line-height:1;">🍽️</div>
+                            <h3 class="tl-name">ร่วมรับประทานอาหาร</h3>
+                            <p class="tl-desc">ร่วมแสดงความยินดีและรับประทานอาหาร</p>
+                        </div>
+                    </div>
+                    <div class="tl-mid">
+                        <div class="tl-dot"><span class="tl-ring"></span><span class="tl-ring tl-ring2"></span></div>
+                    </div>
+                    <div class="tl-side tl-right"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venue -->
+    <section class="venue" id="venue">
+        <div class="container">
+            <h2 class="section-title">สถานที่จัดงาน</h2>
+            <div class="venue-wrapper">
+                <div class="venue-info">
+                    <div class="venue-pin">📍</div>
+                    <h3>บ้านเลขที่ 167</h3>
+                    <p>หมู่ 11 บ้านท่าอุดม<br>ตำบลท่าสีดา อำเภอหนองพอก<br>จังหวัดร้อยเอ็ด</p>
+                    <a href="https://maps.google.com/?q=16.213398,104.209836"
+                       target="_blank" class="btn-map">
+                        🗺️ เปิดใน Google Maps
+                    </a>
+                </div>
+                <div class="venue-map">
+                    <iframe
+                        src="https://maps.google.com/maps?q=16.213398,104.209836&output=embed&z=15"
+                        width="100%" height="380"
+                        style="border:0; border-radius:16px; display:block;"
+                        allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Road Scene -->
+            <div class="road-scene">
+                <div class="road-sky">
+                    <span class="cloud c1">☁️</span>
+                    <span class="cloud c2">☁️</span>
+                    <span class="cloud c3">☁️</span>
+                    <span class="sun">☀️</span>
+                </div>
+                <div class="road-ground">
+                    <span class="road-obj" style="--p:2%">🌳</span>
+                    <span class="road-obj" style="--p:14%">🌴</span>
+                    <span class="road-obj" style="--p:30%">🌳</span>
+                    <span class="road-obj" style="--p:47%">🏠</span>
+                    <span class="road-obj" style="--p:63%">🌳</span>
+                    <span class="road-obj" style="--p:78%">🌴</span>
+                    <span class="road-obj" style="--p:91%">🌳</span>
+                </div>
+                <div class="road-road">
+                    <div class="road-dashes"></div>
+                    <span class="road-car">🚗</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">แกลเลอรี่</h2>
+            <div class="album-tabs">
+                <button class="album-tab active" data-album="prewedding" onclick="switchAlbum('prewedding')">📸 Pre-Wedding</button>
+                <button class="album-tab" data-album="wedding" onclick="switchAlbum('wedding')">🎊 วันงาน</button>
+            </div>
+
+            <!-- อัลบัม Pre-Wedding -->
+            <div class="album-panel active" data-album="prewedding">
+                <div class="prewedding-grid">
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_1.jpg" alt="Pre-Wedding 1">
+                        <div class="gallery-overlay"><span>ดูรูป</span></div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_2.jpg" alt="Pre-Wedding 2">
+                        <div class="gallery-overlay"><span>ดูรูป</span></div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_3.jpg" alt="Pre-Wedding 3">
+                        <div class="gallery-overlay"><span>ดูรูป</span></div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_4.jpg" alt="Pre-Wedding 4">
+                        <div class="gallery-overlay"><span>ดูรูป</span></div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_5.jpg" alt="Pre-Wedding 5">
+                        <div class="gallery-overlay"><span>ดูรูป</span></div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_6.jpg" alt="Pre-Wedding 6">
+                        <div class="gallery-overlay"><span>ดูรูป</span></div>
+                    </div>
+                    <div class="gallery-item" onclick="openLightbox(this)">
+                        <img src="../รูปPre-wedding/LINE_ALBUM_14122568 BE_260502_7.jpg" alt="Pre-Wedding 7">
+                        <div class="gallery-overlay"><span>ดูรูป</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- อัลบัมวันงาน -->
+            <div class="album-panel" data-album="wedding">
+                <a href="https://drive.google.com/drive/folders/1FFbvBVEKlbmMBt9i2908yzMth6MLmiiB?usp=sharing"
+                   target="_blank" rel="noopener" class="drive-card">
+                    <div class="drive-icon">📁</div>
+                    <h3>รูปวันงาน ตุ๊กตา & ป้อม</h3>
+                    <p>คลิกเพื่อเปิดดูรูปทั้งหมดใน Google Drive</p>
+                    <span class="drive-btn">เปิดอัลบัม →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities -->
+    <section class="activities" id="activities">
+        <div class="container">
+            <h2 class="section-title">กิจกรรมในงาน</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon">⛺</div>
+                    <h3>กางเต้นท์</h3>
+                    <p class="activity-desc">วันที่ 25 มิถุนายน — กางเต้นท์งานบุญนะ ไม่ใช่กางเต้นท์ Camping 🎪</p>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">🥗</div>
+                    <h3>ฟักลาบ</h3>
+                    <p class="activity-desc">คืนวันที่ 26 มิถุนายน — จะมีการฟักลาบ เตรียมวัตถุดิบสำหรับอาหารในงานแต่ง</p>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">🎤</div>
+                    <h3>คาราโอเกะ</h3>
+                    <p class="activity-desc">คืนวันที่ 26 - วันงาน — เชิญแขกเสียงดีมาร้องเพลงกัน 🎶</p>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">🎁</div>
+                    <h3>จับฉลากของชำร่วย</h3>
+                    <p class="activity-desc">ในวันงานจะมีการจับฉลากมอบของชำร่วยมากมายให้กับแขกที่มาร่วมงาน 🎉</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox hidden" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">✕</span>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <!-- RSVP -->
+    <section class="rsvp" id="rsvp">
+        <div class="container">
+            <h2 class="section-title">ตอบรับการเชิญ</h2>
+            <p class="rsvp-note">กรุณาตอบรับภายในวันที่ 20 มิถุนายน พ.ศ. 2569</p>
+            <div class="rsvp-box" id="rsvpBox">
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-group">
+                        <label>ชื่อเล่น <span class="required">*</span></label>
+                        <input type="text" id="guestNickname" placeholder="ชื่อเล่น" required>
+                    </div>
+                    <div class="form-group">
+                        <label>เลือกทีม <span class="required">*</span></label>
+                        <div class="pick-row" id="teamSelector">
+                            <button type="button" class="pick-btn" data-value="groom">🤵 ทีมเจ้าบ่าว</button>
+                            <button type="button" class="pick-btn" data-value="bride">👰 ทีมเจ้าสาว</button>
+                        </div>
+                        <input type="hidden" id="guestTeam">
+                    </div>
+                    <div class="form-group">
+                        <label>การเข้าร่วม <span class="required">*</span></label>
+                        <div class="pick-row" id="attendSelector">
+                            <button type="button" class="pick-btn" data-value="yes">🎉 เข้าร่วมงาน</button>
+                            <button type="button" class="pick-btn" data-value="no">💌 ส่งใจไปแทน</button>
+                        </div>
+                        <input type="hidden" id="guestAttend">
+                    </div>
+                    <div class="form-group" id="countGroup" style="display:none">
+                        <label>จำนวนผู้เข้าร่วม <span class="required">*</span></label>
+                        <select id="guestCount">
+                            <option value="">-- เลือกจำนวน --</option>
+                            <option value="1">1 ท่าน</option>
+                            <option value="2">2 ท่าน</option>
+                            <option value="3">3 ท่าน</option>
+                            <option value="4">4 ท่าน</option>
+                            <option value="5">5 ท่าน</option>
+                            <option value="6">6 ท่านขึ้นไป</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit">ยืนยันการตอบรับ ✓</button>
+                </form>
+            </div>
+            <div class="rsvp-success hidden" id="rsvpSuccess">
+                <div class="success-icon">🎊</div>
+                <h3>ขอบคุณที่ตอบรับ!</h3>
+                <p id="successMsg">เราตั้งตารอต้อนรับท่านในวันงาน</p>
+                <button class="btn-again" onclick="resetRsvp()">ตอบรับแทนคนอื่น</button>
+            </div>
+            <!-- Team Scoreboard -->
+            <div class="team-scoreboard">
+                <p class="scoreboard-label">⚔️ ทีมไหนมาแน่น?</p>
+                <div class="scoreboard-row">
+                    <div class="score-side">
+                        <div class="score-emoji">🤵</div>
+                        <div class="score-name">ทีมเจ้าบ่าว</div>
+                        <div class="score-num" id="scoreGroom">0</div>
+                        <div class="score-unit">คน</div>
+                    </div>
+                    <div class="score-vs">VS</div>
+                    <div class="score-side">
+                        <div class="score-emoji">👰</div>
+                        <div class="score-name">ทีมเจ้าสาว</div>
+                        <div class="score-num" id="scoreBride">0</div>
+                        <div class="score-unit">คน</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest List -->
+    <section class="guestlist" id="guestlist">
+        <div class="container">
+            <h2 class="section-title">รายชื่อแขก</h2>
+            <div class="admin-panel" id="adminLogin">
+                <p class="admin-hint">สำหรับเจ้าภาพเท่านั้น — กรุณาใส่รหัสผ่าน</p>
+                <div class="admin-form">
+                    <input type="password" id="adminPass" placeholder="รหัสผ่าน"
+                           onkeydown="if(event.key==='Enter') checkAdmin()">
+                    <button onclick="checkAdmin()">เข้าสู่ระบบ</button>
+                </div>
+                <p id="adminError" class="admin-error hidden">รหัสผ่านไม่ถูกต้อง</p>
+            </div>
+
+            <div class="guestlist-content hidden" id="guestlistContent">
+                <div class="guestlist-stats">
+                    <div class="stat-card">
+                        <span id="totalRSVP">0</span>
+                        <label>ตอบรับแล้ว</label>
+                    </div>
+                    <div class="stat-card">
+                        <span id="totalAttendees">0</span>
+                        <label>จำนวนที่นั่ง</label>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="guest-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>ชื่อเล่น</th>
+                                <th>ทีม</th>
+                                <th>การเข้าร่วม</th>
+                                <th>จำนวน</th>
+                                <th>วันที่ตอบรับ</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="guestTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="guestlist-actions">
+                    <button class="btn-export" onclick="exportCSV()">⬇ ดาวน์โหลด CSV</button>
+                    <button class="btn-logout" onclick="logoutAdmin()">ออกจากระบบ</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <img src="../การ์ดงานแต่ง/ตุ๊กตา-ป้อม Logo.png" alt="Tukta Pom" class="footer-logo">
+        <p class="footer-date">27 · 06 · 2026</p>
+        <p class="footer-quote">Blessing Here — The wedding Love</p>
+        <p class="footer-copy">ชลิตวรรณ & สุทธิพงษ์</p>
+    </footer>
+
+    <canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>
