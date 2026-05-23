@@ -32,7 +32,7 @@
 
 // ── COUNTDOWN ───────────────────────────────────────────────
 const WEDDING_DATE = new Date('2026-06-27T08:09:00');
-const ADMIN_PASSWORD = 'tukta-pom2026';
+const ADMIN_PASSWORD = 'pomlovetukta';
 const STORAGE_KEY = 'wedding_guests_tukta_pom';
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz3HbI3WTmoB_lxj7b9KDa1Z2YUwUIrYHRhH-qQ7NHybwjwDuXUIY5GGT38ELJqNRld/exec';
 
@@ -147,7 +147,15 @@ function setupPickButtons(containerId, hiddenId, onChange) {
 setupPickButtons('teamSelector', 'guestTeam');
 setupPickButtons('attendSelector', 'guestAttend', (val) => {
     document.getElementById('countGroup').style.display = val === 'yes' ? '' : 'none';
+    document.getElementById('wishGroup').style.display  = val === 'no'  ? '' : 'none';
+    document.getElementById('slipGroup').style.display  = val === 'no'  ? '' : 'none';
     if (val !== 'yes') document.getElementById('guestCount').value = '';
+    if (val !== 'no') {
+        document.getElementById('guestWish').value = '';
+        document.getElementById('guestSlip').value = '';
+        document.getElementById('slipImg').style.display = 'none';
+        document.getElementById('slipPlaceholder').style.display = 'block';
+    }
 });
 
 document.getElementById('rsvpForm').addEventListener('submit', function (e) {
@@ -157,11 +165,16 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
     const team     = document.getElementById('guestTeam').value;
     const attend   = document.getElementById('guestAttend').value;
     const count    = document.getElementById('guestCount').value;
+    const wish     = document.getElementById('guestWish').value.trim();
 
     if (!nickname) { alert('กรุณาใส่ชื่อเล่น'); return; }
     if (!team)     { alert('กรุณาเลือกทีม'); return; }
     if (!attend)   { alert('กรุณาเลือกการเข้าร่วม'); return; }
     if (attend === 'yes' && !count) { alert('กรุณาเลือกจำนวนผู้เข้าร่วม'); return; }
+
+    const slipImg  = document.getElementById('slipImg');
+    const slipBase64 = (attend === 'no' && slipImg.style.display !== 'none' && slipImg.src)
+        ? slipImg.src.split(',')[1] : '';
 
     const guestData = {
         id: Date.now(),
@@ -169,23 +182,28 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
         team,
         attend,
         count: attend === 'yes' ? parseInt(count) : 0,
+        wish:  attend === 'no' ? wish : '',
         date: new Date().toLocaleDateString('th-TH', {
             day: '2-digit', month: '2-digit', year: 'numeric'
         })
     };
 
-    // บันทึก localStorage (backup)
+    // บันทึก localStorage (ไม่เก็บรูป)
     const guests = getGuests();
     guests.push(guestData);
     saveGuests(guests);
     renderScoreboard();
 
-    // ส่งไป Google Sheets
+    // ส่งไป Google Sheets (รวมรูป)
+    const sheetData = Object.assign({}, guestData, {
+        slipBase64,
+        slipMime: 'image/jpeg'
+    });
     fetch(SHEET_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(guestData)
+        body: JSON.stringify(sheetData)
     }).catch(() => {});
 
     document.getElementById('successMsg').textContent =
@@ -193,16 +211,42 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
 
     document.getElementById('rsvpBox').classList.add('hidden');
 
-    const successEl  = document.getElementById('rsvpSuccess');
-    const iconEl     = successEl.querySelector('.success-icon');
+    const successEl = document.getElementById('rsvpSuccess');
+    const iconEl    = successEl.querySelector('.success-icon');
     successEl.classList.remove('hidden', 'pop');
     iconEl.classList.remove('bounce');
-    void successEl.offsetWidth; // reflow
+    void successEl.offsetWidth;
     successEl.classList.add('pop');
     iconEl.classList.add('bounce');
 
     launchConfetti();
 });
+
+function handleSlip(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+            const MAX = 1000;
+            let w = img.width, h = img.height;
+            if (w > MAX || h > MAX) {
+                if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+                else       { w = Math.round(w * MAX / h); h = MAX; }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            const compressed = canvas.toDataURL('image/jpeg', 0.75);
+            document.getElementById('slipImg').src = compressed;
+            document.getElementById('slipImg').style.display = 'block';
+            document.getElementById('slipPlaceholder').style.display = 'none';
+        };
+        img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+}
 
 function resetRsvp() {
     document.getElementById('rsvpForm').reset();
@@ -255,20 +299,20 @@ function logoutAdmin() {
     document.getElementById('adminPass').value = '';
 }
 
-function loadGuestTable() {
-    const guests = getGuests();
+function renderGuestTable(guests) {
     const tbody = document.getElementById('guestTableBody');
     let totalAttendees = 0;
 
     tbody.innerHTML = '';
 
     if (guests.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;opacity:0.5;">ยังไม่มีผู้ตอบรับ</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:2rem;opacity:0.5;">ยังไม่มีผู้ตอบรับ</td></tr>';
     } else {
         guests.forEach((g, i) => {
             totalAttendees += (g.count || 0);
             const teamLabel   = g.team === 'groom' ? '🤵 เจ้าบ่าว' : g.team === 'bride' ? '👰 เจ้าสาว' : '—';
             const attendLabel = g.attend === 'yes' ? '🎉 เข้าร่วม' : g.attend === 'no' ? '💌 ส่งใจ' : '—';
+            const slipCell    = g.slip ? `<a href="${escHtml(g.slip)}" target="_blank" style="color:var(--gold)">ดูรูป</a>` : '—';
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${i + 1}</td>
@@ -276,6 +320,8 @@ function loadGuestTable() {
                 <td>${teamLabel}</td>
                 <td>${attendLabel}</td>
                 <td style="text-align:center;">${g.attend === 'yes' ? g.count : '—'}</td>
+                <td style="max-width:160px;white-space:normal;font-size:0.82rem;">${g.wish ? escHtml(g.wish) : '—'}</td>
+                <td>${slipCell}</td>
                 <td style="white-space:nowrap;">${escHtml(g.date)}</td>
                 <td><button class="btn-delete" onclick="deleteGuest(${g.id})">ลบ</button></td>
             `;
@@ -283,8 +329,26 @@ function loadGuestTable() {
         });
     }
 
-    document.getElementById('totalRSVP').textContent      = guests.length;
-    document.getElementById('totalAttendees').textContent  = totalAttendees;
+    document.getElementById('totalRSVP').textContent     = guests.length;
+    document.getElementById('totalAttendees').textContent = totalAttendees;
+}
+
+function loadGuestTable() {
+    const tbody = document.getElementById('guestTableBody');
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;opacity:0.5;">⏳ กำลังโหลดข้อมูล...</td></tr>';
+
+    fetch(SHEET_URL + '?action=get')
+        .then(r => r.json())
+        .then(data => {
+            if (Array.isArray(data) && data.length > 0) {
+                renderGuestTable(data);
+            } else {
+                renderGuestTable(getGuests());
+            }
+        })
+        .catch(() => {
+            renderGuestTable(getGuests());
+        });
 }
 
 function deleteGuest(id) {
