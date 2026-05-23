@@ -318,7 +318,7 @@
                 <div class="activity-card">
                     <div class="activity-icon">⛺</div>
                     <h3>กางเต้นท์</h3>
-                    <p class="activity-desc">วันที่ 25 มิถุนายน — กางเต้นท์งานบุญนะ ไม่ใช่กางเต้นท์ Camping 🎪</p>
+                    <p class="activity-desc">คืนวันที่ 26 — ได้จัดเตรียมลานกางเต้นท์ให้สำหรับแขกสาย Camping 🏕️</p>
                 </div>
                 <div class="activity-card">
                     <div class="activity-icon">🥗</div>
@@ -384,6 +384,21 @@
                             <option value="6">6 ท่านขึ้นไป</option>
                         </select>
                     </div>
+                    <div class="form-group" id="wishGroup" style="display:none">
+                        <label>คำอวยพร <span class="optional">ไม่บังคับ</span></label>
+                        <textarea id="guestWish" placeholder="เขียนคำอวยพรให้คู่บ่าวสาว..."></textarea>
+                    </div>
+                    <div class="form-group" id="slipGroup" style="display:none">
+                        <label>แนบรูป <span class="optional">ไม่บังคับ</span></label>
+                        <div class="slip-zone" id="slipZone" onclick="document.getElementById('guestSlip').click()">
+                            <input type="file" id="guestSlip" accept="image/*" style="display:none" onchange="handleSlip(this)">
+                            <div id="slipPlaceholder">
+                                <div style="font-size:2rem;">📎</div>
+                                <div>แตะเพื่อเลือกรูป</div>
+                            </div>
+                            <img id="slipImg" src="" style="display:none;max-width:100%;border-radius:8px;" alt="preview">
+                        </div>
+                    </div>
                     <button type="submit" class="btn-submit">ยืนยันการตอบรับ ✓</button>
                 </form>
             </div>
@@ -395,7 +410,7 @@
             </div>
             <!-- Team Scoreboard -->
             <div class="team-scoreboard">
-                <p class="scoreboard-label">⚔️ ทีมไหนมาแน่น?</p>
+                <p class="scoreboard-label">🎊 จำนวนแขกผู้มีเกียรติ ณ ตอนนี้</p>
                 <div class="scoreboard-row">
                     <div class="score-side">
                         <div class="score-emoji">🤵</div>
@@ -449,6 +464,8 @@
                                 <th>ทีม</th>
                                 <th>การเข้าร่วม</th>
                                 <th>จำนวน</th>
+                                <th>คำอวยพร</th>
+                                <th>รูปแนบ</th>
                                 <th>วันที่ตอบรับ</th>
                                 <th></th>
                             </tr>
@@ -470,6 +487,7 @@
         <p class="footer-date">27 · 06 · 2026</p>
         <p class="footer-quote">Blessing Here — The wedding Love</p>
         <p class="footer-copy">ชลิตวรรณ & สุทธิพงษ์</p>
+        <p class="footer-credit">Created by Claude Code</p>
     </footer>
 
     <canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;"></canvas>
