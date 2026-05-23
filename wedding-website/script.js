@@ -260,7 +260,16 @@ function resetRsvp() {
 }
 
 function renderScoreboard() {
-    const guests = getGuests();
+    fetch(SHEET_URL + '?action=get')
+        .then(r => r.json())
+        .then(data => {
+            const guests = Array.isArray(data) && data.length > 0 ? data : getGuests();
+            updateScoreboardUI(guests);
+        })
+        .catch(() => updateScoreboardUI(getGuests()));
+}
+
+function updateScoreboardUI(guests) {
     document.getElementById('scoreGroom').textContent = guests.filter(g => g.team === 'groom').length;
     document.getElementById('scoreBride').textContent = guests.filter(g => g.team === 'bride').length;
 }
