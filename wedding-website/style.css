@@ -794,7 +794,7 @@ body {
 .road-car {
     position: absolute;
     top: 50%;
-    transform: translateY(-60%);
+    transform: translateY(-60%) scaleX(-1);
     font-size: 2.2rem;
     animation: carDrive 5s linear infinite;
     will-change: left;
