@@ -207,7 +207,7 @@ document.getElementById('rsvpForm').addEventListener('submit', function (e) {
     }).catch(() => {});
 
     document.getElementById('successMsg').textContent =
-        attend === 'yes' ? 'เราตั้งตารอต้อนรับท่านในวันงาน 🎉' : 'ขอบคุณที่ส่งใจมาด้วยนะ 💌';
+        attend === 'yes' ? `รบกวนคูณ${nickname}ช่วยsaveรูปนี้ไว้ เพื่อนำไปลงทะเบียนจับฉลากของชำร่วยในวันงาน` : 'ขอบคุณที่ส่งใจมาด้วยนะ 💌';
 
     document.getElementById('rsvpBox').classList.add('hidden');
 
