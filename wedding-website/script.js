@@ -270,8 +270,17 @@ function renderScoreboard() {
 }
 
 function updateScoreboardUI(guests) {
-    document.getElementById('scoreGroom').textContent = guests.filter(g => g.team === 'groom').length;
-    document.getElementById('scoreBride').textContent = guests.filter(g => g.team === 'bride').length;
+    // รวมจำนวนแขกจริง ๆ ตามที่กรอก (count field)
+    const groomTotal = guests
+        .filter(g => g.team === 'groom' || g.team === 'เจ้าบ่าว')
+        .reduce((sum, g) => sum + (parseInt(g.count) || 0), 0);
+
+    const brideTotal = guests
+        .filter(g => g.team === 'bride' || g.team === 'เจ้าสาว')
+        .reduce((sum, g) => sum + (parseInt(g.count) || 0), 0);
+
+    document.getElementById('scoreGroom').textContent = groomTotal;
+    document.getElementById('scoreBride').textContent = brideTotal;
 }
 
 // ── STORAGE HELPERS ───────────────────────────────────────────────
